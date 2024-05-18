@@ -1,0 +1,224 @@
+<?xml version="1.0"?>
+
+<robot name="roboticarm" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- Include Gazebo Parameters -->
+    <xacro:include filename="$(find roboticarm_description)/urdf/roboticarm_gazebo.xacro" />
+
+    <!-- Include ros2_control Plugins -->
+    <xacro:include filename="$(find roboticarm_description)/urdf/roboticarm_ros2_control.xacro" />
+
+    <xacro:property name="PI" value="3.14159" />
+    <xacro:property name="effort" value="30.0" />
+    <xacro:property name="velocity" value="10.0" />
+
+    <xacro:macro name="def_inertial" params="mass">
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="${mass}"/>
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0" 
+                     iyy="1.0" iyz="0.0"
+                     izz="1.0" />
+        </inertial>
+    </xacro:macro>
+
+    <link name="world_link" />
+
+    <link name="base_link"> 
+        <visual>
+            <geometry>
+                <mesh filename="package://roboticarm_description/meshes/basement.STL" scale="0.01 0.01 0.01" />
+            </geometry>
+            <origin rpy="0 0 0" xyz="-0.5 -0.5 0" />
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://roboticarm_description/meshes/basement.STL" scale="0.01 0.01 0.01" />
+            </geometry>
+            <origin rpy="0 0 0" xyz="-0.5 -0.5 0" />
+        </collision>
+        <xacro:def_inertial mass="1.0" />
+    </link>
+
+    <link name="base_plate_link">
+        <visual>
+            <geometry>
+                <mesh filename="package://roboticarm_description/meshes/base_plate.STL" scale="0.01 0.01 0.01" />
+            </geometry>
+            <origin rpy="0 0 0" xyz="-0.39 -0.39 -0.56" />
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://roboticarm_description/meshes/base_plate.STL" scale="0.01 0.01 0.01" />
+            </geometry>
+            <origin rpy="0 0 0" xyz="-0.39 -0.39 -0.56" />
+        </collision>
+        <xacro:def_inertial mass="0.1" />
+    </link>
+
+    <link name="forward_drive_arm_link">
+        <visual>
+            <geometry>
+                <mesh filename="package://roboticarm_description/meshes/forward_drive_arm.STL" scale="0.01 0.01 0.01" />
+            </geometry>
+            <origin rpy="0 ${-PI / 2} ${PI / 2}" xyz="0.19 0.06 -0.08" />
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://roboticarm_description/meshes/forward_drive_arm.STL" scale="0.01 0.01 0.01" />
+            </geometry>
+            <origin rpy="0 ${-PI / 2} ${PI / 2}" xyz="0.19 0.06 -0.08" />
+        </collision>
+        <xacro:def_inertial mass="0.1" />
+    </link>
+
+    <link name="horizontal_arm_link">
+        <visual>
+            <geometry>
+                <mesh filename="package://roboticarm_description/meshes/horizontal_arm.STL" scale="0.01 0.01 0.01" />
+            </geometry>
+            <origin rpy="${PI / 2} 0 ${PI / 2}" xyz="-0.03 -0.04 -0.06" />
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://roboticarm_description/meshes/horizontal_arm.STL" scale="0.01 0.01 0.01" />
+            </geometry>
+            <origin rpy="${PI / 2} 0 ${PI / 2}" xyz="-0.03 -0.04 -0.06" />
+        </collision>
+        <xacro:def_inertial mass="0.1" />
+    </link>
+
+    <link name="claw_support_link">
+        <visual>
+            <geometry>
+                <mesh filename="package://roboticarm_description/meshes/claw_support.STL" scale="0.01 0.01 0.01" />
+            </geometry>
+            <origin rpy="0 0 ${PI / 2}" xyz="0 -0.05 -0.15" />
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://roboticarm_description/meshes/claw_support.STL" scale="0.01 0.01 0.01" />
+            </geometry>
+            <origin rpy="0 0 ${PI / 2}" xyz="0 -0.05 -0.15" />
+        </collision>
+        <xacro:def_inertial mass="0.05" />
+    </link>
+
+    <link name="gripper_right_link">
+        <visual>
+            <geometry>
+                <mesh filename="package://roboticarm_description/meshes/gripper_right.STL" scale="0.01 0.01 0.01" />
+            </geometry>
+            <origin rpy="0 0 ${-PI / 2}" xyz="-0.1 0.5 -0.1" />
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://roboticarm_description/meshes/gripper_right.STL" scale="0.01 0.01 0.01" />
+            </geometry>
+            <origin rpy="0 0 ${-PI / 2}" xyz="-0.1 0.5 -0.1" />
+        </collision>
+        <xacro:def_inertial mass="0.01" />
+    </link>
+
+    <link name="gripper_left_link">
+        <visual>
+            <geometry>
+                <mesh filename="package://roboticarm_description/meshes/gripper_left.STL" scale="0.01 0.01 0.01" />
+            </geometry>
+            <origin rpy="0 0 ${-PI / 2}" xyz="-0.04 0.5 -0.1" />
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://roboticarm_description/meshes/gripper_left.STL" scale="0.01 0.01 0.01" />
+            </geometry>
+            <origin rpy="0 0 ${-PI / 2}" xyz="-0.04 0.5 -0.1" />
+        </collision>
+        <xacro:def_inertial mass="0.01" />
+    </link>
+
+    <joint name="world_base_joint" type="fixed">
+        <parent link="world_link" />
+        <child link="base_link" />
+        <origin rpy="0 0 0" xyz="0 0 0" />
+    </joint>
+
+    <joint name="base_base_plate_joint" type="revolute">
+        <parent link="base_link" />
+        <child link="base_plate_link" />
+        <axis xyz="0 0 1" />
+        <limit lower="${-PI / 2}" upper="${PI / 2}" effort="${effort}" velocity="${effort}" />
+        <origin rpy="0 0 0" xyz="0 0 0.307" />
+    </joint>
+
+    <transmission name="transmission_base_base_plate_joint">
+        <plugin>transmission_interface/SimpleTransmission</plugin>
+        <actuator name="motor_base_base_plate_joint" role="actuator1" />
+        <joint name="base_base_plate_joint" role="joint1">
+            <mechanical_reduction>1.0</mechanical_reduction>
+        </joint>
+    </transmission>
+
+    <joint name="base_plate_forward_drive_arm_joint" type="revolute">
+        <parent link="base_plate_link" />
+        <child link="forward_drive_arm_link" />
+        <axis xyz="-1 0 0" />
+        <limit lower="${-PI / 2}" upper="${PI / 2}" effort="${effort}" velocity="${effort}" />
+        <origin rpy="0 0 0" xyz="0 -0.02 0.35" />
+    </joint>
+
+    <transmission name="transmission_base_plate_forward_drive_arm_joint">
+        <plugin>transmission_interface/SimpleTransmission</plugin>
+        <actuator name="motor_base_plate_forward_drive_arm_joint" role="actuator1" />
+        <joint name="base_plate_forward_drive_arm_joint" role="joint1">
+            <mechanical_reduction>1.0</mechanical_reduction>
+        </joint>
+    </transmission>
+
+    <joint name="forward_drive_arm_horizontal_arm_joint" type="revolute">
+        <parent link="forward_drive_arm_link" />
+        <child link="horizontal_arm_link" />
+        <axis xyz="1 0 0" />
+        <limit lower="0.221" upper="${PI / 2}" effort="${effort}" velocity="${effort}" />
+        <origin rpy="-1.14 0 0" xyz="0 0 0.8" />
+    </joint>
+
+    <transmission name="transmission_forward_drive_arm_horizontal_arm_joint">
+        <plugin>transmission_interface/SimpleTransmission</plugin>
+        <actuator name="motor_forward_drive_arm_horizontal_arm_joint" role="actuator1" />
+        <joint name="forward_drive_arm_horizontal_arm_joint" role="joint1">
+            <mechanical_reduction>1.0</mechanical_reduction>
+        </joint>
+    </transmission>
+
+    <joint name="horizontal_arm_claw_support_joint" type="fixed">
+        <parent link="horizontal_arm_link" />
+        <child link="claw_support_link" />
+        <origin rpy="0 0 0" xyz="0 0.82 0" />
+    </joint>
+
+    <joint name="claw_support_link_gripper_right_joint" type="revolute">
+        <parent link="claw_support_link" />
+        <child link="gripper_right_link" />
+        <axis xyz="0 0 1" />
+        <limit lower="${-PI / 2}" upper="0.0" effort="${effort}" velocity="${effort}" />
+        <origin rpy="0 0 0" xyz="-0.04 0.13 -0.1" />
+    </joint>
+
+    <transmission name="transmission_claw_support_link_gripper_right_joint">
+        <plugin>transmission_interface/SimpleTransmission</plugin>
+        <actuator name="motor_claw_support_link_gripper_right_joint" role="actuator1" />
+        <joint name="claw_support_link_gripper_right_joint" role="joint1">
+            <mechanical_reduction>1.0</mechanical_reduction>
+        </joint>
+    </transmission>
+
+    <joint name="claw_support_link_gripper_left_joint" type="revolute">
+        <parent link="claw_support_link" />
+        <child link="gripper_left_link" />
+        <axis xyz="0 0 1" />
+        <limit lower="0.0" upper="${PI / 2}" effort="${effort}" velocity="${effort}" />
+        <origin rpy="0 0 0" xyz="-0.22 0.13 -0.1" />
+        <mimic joint="claw_support_link_gripper_right_joint" multiplier="-1" />
+    </joint>
+
+</robot>

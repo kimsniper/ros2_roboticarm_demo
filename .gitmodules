@@ -1,0 +1,3 @@
+[submodule "roboticarm_pi_ros2_ws/src/ros2_pca9685"]
+	path = roboticarm_pi_ros2_ws/src/ros2_pca9685
+	url = /home/kim/Desktop/ros2_roboticarm_demo/roboticarm_pi_ros2_ws/src/ros2_pca9685

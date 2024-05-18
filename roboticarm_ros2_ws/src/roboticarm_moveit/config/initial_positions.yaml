@@ -1,0 +1,7 @@
+# Default initial positions for system ros2_control fake system
+
+initial_positions:
+  base_base_plate_joint: 0
+  base_plate_forward_drive_arm_joint: 0
+  forward_drive_arm_horizontal_arm_joint: 0
+  claw_support_link_gripper_right_joint: 0
