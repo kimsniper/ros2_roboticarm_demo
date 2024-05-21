@@ -10,7 +10,6 @@ This package has been tested with the following hardwares: \
 
 Raspberry Pi 4B, 4GB RAM. \
 PCA9685 sensor breakout board used: https://www.nxp.com/products/power-management/lighting-driver-and-controller-ics/led-controllers/16-channel-12-bit-pwm-fm-plus-ic-bus-led-controller:PCA9685 \
-The Raspberry Pi 4B runs this image: https://github.com/ros-realtime/ros-realtime-rpi4-image \
 Towerpro SG90 Servo motor: https://www.towerpro.com.tw/product/sg90-7/
 
 ### Preferred Environment Setup (Host PC)
@@ -34,7 +33,7 @@ Note: Since the RPi4 will run an Ubuntu Server, the PC will communicate with Ras
 
 ### Workspaces
 
-**This repository contains two ROS2 workspacess, the workspace that will run on RPI4 (roboticarm_pi_ros2_ws) and on PC/Host (roboticarm_ros2_ws). Just clone this repository both PC and Raspberry Pi 4 as shown below:
+**This repository contains two ROS2 workspaces, the workspace that will run on RPI4 (roboticarm_pi_ros2_ws) and on PC/Host (roboticarm_ros2_ws). Just clone this repository on both PC and Raspberry Pi 4 as shown below:
 
 ```bash
 git clone --recursive https://github.com/kimsniper/ros2_roboticarm_demo.git
@@ -100,3 +99,4 @@ The nodes should be running by now.
 
 ### Working Demo Videos
 
+Inverse Kinematics Demo with MoveIt2: https://www.linkedin.com/posts/activity-7198200785514500096-aaFl?utm_source=share&utm_medium=member_desktop
