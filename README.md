@@ -41,7 +41,7 @@ git clone --recursive https://github.com/kimsniper/ros2_roboticarm_demo.git
 
 ### Instructions for PC ROS2 workspace
 
-1. Navigate to < Repo path on your PC >/ros2_roboticarm_demo/roboticarm_pi_ros2_ws
+1. Navigate to < Repo path on your PC >/ros2_roboticarm_demo/roboticarm_ros2_ws
 2. Build the packages
 ```bash
 colcon build
