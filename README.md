@@ -78,7 +78,7 @@ Note: The Joint State Publisher control and MoveIt control should never be used/
 
 ### Instructions for Raspberry Pi 4 ROS2 workspace
 
-1. Navigate to < Repo path on your PC >/ros2_roboticarm_demo/roboticarm_pi_ros2_ws
+1. Navigate to < Repo path on your Raspberry Pi >/ros2_roboticarm_demo/roboticarm_pi_ros2_ws
 2. Build the packages
 ```bash
 colcon build
