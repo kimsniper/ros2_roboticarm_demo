@@ -98,7 +98,8 @@ ros2 run ros2_jointprocessor ros2_jointprocessor
 The nodes should be running by now.
 
 ### Working Demo Videos
-
+![Demo](./images/ik_control_demo.gif)
 Inverse Kinematics Demo with MoveIt2: https://www.linkedin.com/posts/activity-7198200785514500096-aaFl?utm_source=share&utm_medium=member_desktop
 
+![Demo](./images/direct_control_demo.gif)
 Interactive Robotic Arm Control: https://www.linkedin.com/posts/activity-7198545377602461696-PqYb?utm_source=share&utm_medium=member_desktop
